@@ -6,7 +6,7 @@ const Juego = require('../models/Juego');
 
 console.log(' Archivo routes/juegos.js cargado correctamente');
 
-// 🔹 Obtener todos los juegos
+// Obtener todos los juegos
 router.get('/', async (req, res) => {
   try {
     const juegos = await Juego.find();
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 🔹 Obtener un juego por ID
+// Obtener un juego por ID
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// 🔹 Crear un nuevo juego
+// Crear un nuevo juego
 router.post('/', async (req, res) => {
   try {
     const nuevoJuego = new Juego(req.body);
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 🔹 Actualizar un juego
+// Actualizar un juego
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// 🔹 Eliminar un juego
+// Eliminar un juego
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
