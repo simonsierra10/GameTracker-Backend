@@ -76,4 +76,30 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// ➕ Agregar reseña a un juego
+router.post('/:id/resenas', async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ mensaje: 'ID inválido' });
+  }
+  try {
+    const juego = await Juego.findById(id);
+    if (!juego) return res.status(404).json({ mensaje: 'Juego no encontrado' });
+
+    const nuevaReseña = {
+      usuario: req.body.usuario,
+      texto: req.body.texto,
+      fecha: new Date().toISOString()
+    };
+
+    juego.reseñas.push(nuevaReseña);
+    await juego.save();
+
+    res.json(juego);
+  } catch (error) {
+    console.error('Error al agregar reseña:', error);
+    res.status(400).json({ mensaje: 'Error al agregar reseña' });
+  }
+});
+
 module.exports = router;

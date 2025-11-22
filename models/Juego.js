@@ -10,7 +10,7 @@ const JuegoSchema = new mongoose.Schema({
     {
       usuario: String,
       texto: String,
-      fecha: String
+      fecha: { type: String, default: new Date().toISOString() }
     }
   ]
 });
